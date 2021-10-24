@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class Player : MonoBehaviour
 {
     private Animation thisAnimation;
@@ -22,9 +23,18 @@ public class Player : MonoBehaviour
         {
             thisAnimation.Play();
             yVelocity = jumpForce;
-            
+
         }
         rgby.velocity = new Vector3(rgby.velocity.x, rgby.velocity.y + yVelocity, rgby.velocity.z);
 
     }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            SceneManager.LoadScene("LoseScene");
+        }
+        
+    }
+
 }
